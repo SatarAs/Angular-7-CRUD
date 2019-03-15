@@ -20,7 +20,7 @@ export class ProductAddComponent implements OnInit {
   // Le constructor permet simplement d'injecter des dépendances
   constructor(private router: Router, private api: ApiService, private formBuilder: FormBuilder) { }
 
-  // Le ngOnInit est utiliser pour initialiser le composant
+  // Le ngOnInit est utiliser pour initialiser le composant, ici il initie le formulaire ainsi que la validation des champs
   ngOnInit() {
     this.productForm = this.formBuilder.group({
       'prod_name' : [null, Validators.required],

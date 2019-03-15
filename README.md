@@ -1,29 +1,70 @@
-# Angular 7 Tutorial: Building CRUD Web Application
+# Tutoriel Angular 7 : CRUD sur application web
 
-This source code is part of [Angular 7 Tutorial: Building CRUD Web Application](https://www.djamware.com/post/5bca67d780aca7466989441f/angular-7-tutorial-building-crud-web-application) tutorial.
+Je ne voyais pas comment faire quelque chose qui serait simple pour toi de vérifier.
+Je place donc toutes les explications ici.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.1.
 
-## Development server
+## Architecture
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+`api.service.ts` Il permet de connecter l'application au serveur Express via une API.
 
-## Code scaffolding
+`app.component.ts` Ce fichier est le composant principal, il comporte toute la logique de notre application.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`app.module.ts` Ce fichier permet d'importer et de déclarer les composants dans notre application.
 
-## Build
+`app.routing.module.ts` Il permet de définir les routes accessibles depuis notre application.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`product.ts` Ce fichier est lié à notre objet `product` qui contient le typage de ces propriétés. 
 
-## Running unit tests
+`product-add` Permet l'ajout de produit 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`product-detail` Permet l'affichage d'un produit ainsi que la suppression de ce même produit
 
-## Running end-to-end tests
+`product-edit` Permet l'édition d'un produit
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+`products` Permet l'affichage de la liste des produits
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Détails du code
+
+- `product-add.component.ts`
+
+Nous déclarons le groupe de formulaire pour le produit ainsi que les variables requises.
+Le `constructor` ici nous permet d'injecter les dépendances nécessaires ( Api, Router et FormBuilder)
+
+Contrairement au `constructor`, le `ngOnInit` permet d'initialiser le `component`.
+Ici, il initie le formulaire d'ajout du produit avec les différentes propriétés.
+
+A la soumission du formulaire, une réponse sera envoyé avec un déclencheur spécifié.
+
+#
+
+- `product-detail.component.ts`
+
+Déclaration des variables définis depuis le `product.ts` afin d'en extraire les données depuis l'API.
+
+Le `ngOnInit` dans le détail d'un produit, permet d'appeler la fonction `getProductDetails` au lancement du composant.
+
+La fonction `getProductDetails` permet de récupérer les données du produit depuis l'API.
+
+La fonction `deleteProduct` permet de supprimer un produit depuis l'API.
+
+#
+
+- `product-edit.component.ts`
+
+Le `ngOnInit` ici, permet la validation quand le composant est lancer.
+
+Le `getProduct` permet de récupérer les données d'un produit depuis l'api.
+
+Ici, le `onFormSubmit` permet comme dans le `product-add.ts` de valider l'envoi du formulaire grâce à un déclencheur.
+
+#
+
+- `products.component.ts`
+
+La propriété `displayedColumns` permet d'afficher dans un tableau les champs `prod_name`, `prod_price`
+
+Le `constructor` permet l'appel de l'API
+
+Le `ngOnInit` permet de récupérer la liste des produits depuis l'API.
